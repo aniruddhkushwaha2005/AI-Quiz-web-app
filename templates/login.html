@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% set title = "Login" %}
+{% block content %}
+<div class="card card--narrow">
+  <div class="card__header">
+    <h2>Welcome back</h2>
+    <p class="muted">Login to see your dashboard and quiz history.</p>
+  </div>
+
+  {% if error %}
+    <div class="pill" style="border-color: rgba(251,113,133,0.35); background: rgba(251,113,133,0.10);">
+      {{ error }}
+    </div>
+  {% endif %}
+
+  <form method="POST" class="form">
+    <label class="label">Email</label>
+    <input class="input" name="email" placeholder="you@example.com" required>
+
+    <label class="label">Password</label>
+    <input class="input" name="password" type="password" placeholder="••••••••" required>
+
+    <button class="btn btn--primary" type="submit">Login</button>
+  </form>
+
+  <div class="card__footer">
+    <span class="muted">New here?</span>
+    <a href="/register">Create an account</a>
+  </div>
+</div>
+{% endblock %}

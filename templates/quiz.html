@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% set title = "Quiz" %}
+{% block content %}
+<div class="card">
+  <div class="card__header">
+    <h2>AI Generated Quiz</h2>
+    <p class="muted">Answer all questions and submit to save your result.</p>
+  </div>
+
+  <form method="POST" action="/submit" class="quiz">
+    {% for q in questions %}
+      {% set q_index = loop.index0 %}
+      <div class="question">
+        <h3>{{loop.index}}. {{q.question}}</h3>
+        <div class="options">
+          {% for opt in q.options %}
+            <label class="option">
+              <input type="radio" name="{{q_index}}" value="{{opt}}" required>
+              <span>{{opt}}</span>
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+
+    <div class="quiz__actions">
+      <button class="btn btn--primary" type="submit">Submit Quiz</button>
+      <a class="btn btn--ghost" href="/trainer">Generate another</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

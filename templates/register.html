@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% set title = "Register" %}
+{% block content %}
+<div class="card card--narrow">
+  <div class="card__header">
+    <h2>Create your account</h2>
+    <p class="muted">Track your progress month-by-month.</p>
+  </div>
+
+  {% if error %}
+    <div class="pill" style="border-color: rgba(251,113,133,0.35); background: rgba(251,113,133,0.10);">
+      {{ error }}
+    </div>
+  {% endif %}
+
+  <form method="POST" class="form">
+    <label class="label">Name</label>
+    <input class="input" name="name" placeholder="Your name" required>
+
+    <label class="label">Email</label>
+    <input class="input" name="email" placeholder="you@example.com" required>
+
+    <label class="label">Password</label>
+    <input class="input" name="password" type="password" placeholder="Create a password" required>
+
+    <button class="btn btn--primary" type="submit">Register</button>
+  </form>
+
+  <div class="card__footer">
+    <span class="muted">Already have an account?</span>
+    <a href="/login">Login</a>
+  </div>
+</div>
+{% endblock %}

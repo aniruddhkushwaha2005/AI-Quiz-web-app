@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% set title = "Generate Quiz" %}
+{% block content %}
+<div class="card">
+  <div class="card__header">
+    <h2>Generate a quiz</h2>
+    <p class="muted">Pick a topic, difficulty, and the number of questions.</p>
+  </div>
+
+  <form method="POST" class="form form--grid">
+    <div>
+      <label class="label">Topic</label>
+      <input class="input" type="text" name="topic" placeholder="Example: Python, AI, Networking" required>
+    </div>
+
+    <div>
+      <label class="label">Difficulty</label>
+      <select class="select" name="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="label">Number of Questions</label>
+      <select class="select" name="count">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+    </div>
+
+    <div class="form__actions">
+      <button class="btn btn--primary" type="submit">Generate Quiz</button>
+      <a class="btn btn--ghost" href="/dashboard">Back to Dashboard</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

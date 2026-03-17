@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% set title = "Dashboard" %}
+{% block content %}
+<div class="stack">
+  <div class="hero">
+    <div>
+      <h2>Student Dashboard</h2>
+      <p class="muted">Signed in as <span class="mono">{{ user_email }}</span></p>
+    </div>
+    <div class="hero__art" aria-hidden="true">
+      <div class="hero__artCard">
+        <div class="hero__artGlow"></div>
+        <div class="hero__artTitle">Monthly Progress</div>
+        <div class="hero__artBars">
+          <span style="height: 42%"></span>
+          <span style="height: 68%"></span>
+          <span style="height: 54%"></span>
+          <span style="height: 84%"></span>
+          <span style="height: 63%"></span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="/trainer">Start a new quiz</a>
+      <a class="btn btn--ghost" href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat__label">Total quizzes</div>
+      <div class="stat__value">{{ total_quizzes }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Average score</div>
+      <div class="stat__value">{{ avg_percent }}%</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Best score</div>
+      <div class="stat__value">{{ best_percent }}%</div>
+    </div>
+  </div>
+
+  {% if monthly|length == 0 %}
+    <div class="card">
+      <div class="card__header">
+        <h3>No quizzes yet</h3>
+        <p class="muted">Start your first quiz to see monthly progress here.</p>
+      </div>
+      <div class="card__footer card__footer--actions">
+        <a class="btn btn--primary" href="/trainer">Generate a quiz</a>
+      </div>
+    </div>
+  {% else %}
+    {% for m in monthly %}
+      <div class="card">
+        <div class="card__header card__header--row">
+          <div>
+            <h3>{{ m.key }}</h3>
+            <p class="muted">{{ m.attempts|length }} quiz attempt(s)</p>
+          </div>
+          <div class="pill">
+            Month avg: {{ m.avg_percent }}%
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Difficulty</th>
+                <th>Questions</th>
+                <th>Score</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for a in m.attempts %}
+                {% set pct = (a.score / a.total * 100) if a.total else 0 %}
+                <tr>
+                  <td class="mono">{{ a.created_at.replace('T',' ') }}</td>
+                  <td>{{ a.topic or "—" }}</td>
+                  <td><span class="badge badge--{{ a.difficulty or 'neutral' }}">{{ (a.difficulty or "—")|title }}</span></td>
+                  <td>{{ a.question_count or a.total }}</td>
+                  <td>{{ a.score }} / {{ a.total }}</td>
+                  <td><span class="pill pill--small">{{ pct|round(1) }}%</span></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}

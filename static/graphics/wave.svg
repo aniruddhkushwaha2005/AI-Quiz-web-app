@@ -1,0 +1,16 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="w" x1="0" y1="0" x2="1200" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7DD3FC" stop-opacity="0.25"/>
+      <stop offset="0.55" stop-color="#60A5FA" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#0B1220" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+  <g filter="url(#soft)">
+    <path d="M0 270C160 200 280 320 420 300C560 280 640 160 770 150C910 140 980 240 1100 220C1140 213 1172 200 1200 188V420H0V270Z" fill="url(#w)"/>
+    <path d="M0 315C190 250 290 340 450 325C610 310 690 215 820 205C970 193 1010 282 1125 270C1160 266 1185 258 1200 250V420H0V315Z" fill="url(#w)"/>
+  </g>
+</svg>
